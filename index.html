@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Sims 4 Story Generator</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    </head>
+    <body>
+        <h1>Sims 4 Story Generator</h1>
+        <p>Full Generation: Generates a first and last name, nationality, age</p>
+        <p>Partial Generation: Generates a first and last name, nationality</p>
+        <p>Full vs Story?</p>
+        <p> Story will generate a description that you can put in the description section of the household. Will go into detail about life progression such as career etc</p>
+        <select id="generationType">
+            <option value="">Please Select Generation Type</option>
+            <option value="full">Full Generation</option>
+            <option value="partial">Partial Generation</option>
+            <option value="random">Random Names</option>
+            <option value="story">Story/Description Generation</option>
+        </select>
+
+        <div id="additionalInput"></div>
+        <button id="generateButton">Generate</button>
+
+        <div id="output"></div>
+
+       <script src="script.js"></script>
+
+    </body>
+</html>
