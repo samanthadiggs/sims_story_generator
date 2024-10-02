@@ -7,7 +7,7 @@ document.getElementById('generationType').addEventListener('change', function() 
     additionalInputs.innerHTML = '';
 
     // Show inputs based on selection
-    if (type === 'full' || type === 'partial' || type === 'story') {
+    if (type === 'full' || type === 'partial') {
         additionalInputs.innerHTML += `
             <select class="dropdown form-select" id="gender">
                 <option value="">Select Gender</option>
@@ -75,7 +75,70 @@ document.getElementById('generationType').addEventListener('change', function() 
             <input type="range" id="numberOfNames" min="1" max="20" value="10" oninput="this.nextElementSibling.value = this.value">
             <output>10</output>
         `;
-    } 
+    } else if(type === 'story'){
+        additionalInputs.innerHTML += `
+            <select class="dropdown form-select" id="typeStory">
+                <option value="">Select Type</option>
+                <option value="Sim">Sim</option>
+                <option value="Household></option>
+            </select>
+
+            <select class="dropdown form-select" id="genderStory">
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <select class="dropdown form-select" id="householdType">
+                <option value="">Select houseHoldType</option>
+                <option value="Male">Homogenous (one nationality) </option>
+                <option value="Female">Mixed (two nationalities)</option>
+            </select>
+
+
+            <select class="dropdown form-select" id="nationalityStory2">
+                <option value="">Select Nationality 1</option>
+                <option value="Random">Random</option>
+                <option value="American">American</option>
+                <option value="French">French</option>
+                <option value="Chinese">Chinese</option>
+                <option value="Korean">Korean</option>
+                <option value="Vietnamese">Vietnamese</option>
+                <option value="Japanese">Japanese</option>
+                <option value="Thai">Thai</option>
+                <option value="Italian">Italian</option>
+                <option value="Spanish">Spanish</option>
+                <option value="African American">African American</option>
+                <option value="Indian">Indian</option>
+                <option value="Filipino">Filipino</option>
+                <option value="Greek">Greek</option>
+                <option value="Arabic">Arabic</option>
+                <option value="Nigerian">Nigerian</option>
+                <option value="Hawaiian">Hawaiian</option>
+            </select>
+
+            <select class="dropdown form-select" id="nationalityStory2">
+                <option value="">Select Nationality 2</option>
+                <option value="Random">Random</option>
+                <option value="American">American</option>
+                <option value="French">French</option>
+                <option value="Chinese">Chinese</option>
+                <option value="Korean">Korean</option>
+                <option value="Vietnamese">Vietnamese</option>
+                <option value="Japanese">Japanese</option>
+                <option value="Thai">Thai</option>
+                <option value="Italian">Italian</option>
+                <option value="Spanish">Spanish</option>
+                <option value="African American">African American</option>
+                <option value="Indian">Indian</option>
+                <option value="Filipino">Filipino</option>
+                <option value="Greek">Greek</option>
+                <option value="Arabic">Arabic</option>
+                <option value="Nigerian">Nigerian</option>
+                <option value="Hawaiian">Hawaiian</option>
+            </select>
+        `;
+    }
 });
 
 document.getElementById('generate').addEventListener('click', function() {
@@ -90,7 +153,7 @@ document.getElementById('generate').addEventListener('click', function() {
     // functions & their variables
 
     function getRandomAgeCategory(){
-        const ageCategories = ['Child', 'Teen', 'Young Adult', 'Adult', 'Elder'];
+        const ageCategories = ['Young Adult', 'Adult', 'Elder'];
         const randomIndex = Math.floor(Math.random() * ageCategories.length);
         return ageCategories[randomIndex];
     };
@@ -138,7 +201,7 @@ document.getElementById('generate').addEventListener('click', function() {
             const data = results.data;
             // let output = '';
 
-            if (genType === 'full' || genType === 'partial' || genType ==='story') {
+            if (genType === 'full' || genType === 'partial') {
                 // Generate a full, partial, or story
 
                // Generating the names
@@ -188,16 +251,7 @@ document.getElementById('generate').addEventListener('click', function() {
                             <p class="outputText">Age: ${randomAge}</p>
 
                     `;
-                } else if(genType == 'story'){
-                    generatedOutput.innerHTML += `
-                            <p class="outputText">Generated Profile:</p>
-                            <p class="outputText">Nationality: ${nationality}</p>
-                            <p class="outputText">Name: ${names}</p>
-                            <p class="outputText">Age: ${randomAge}</p>
-
-                    `;
-
-                }
+                } 
 
 
             } else if (genType === 'random') { 
@@ -230,11 +284,16 @@ document.getElementById('generate').addEventListener('click', function() {
                     }        
 
                 }else if(randomType == 'Both'){
+                    
 
                 }
 
 
-            } 
+            } else if(genType === 'story'){
+
+                const household = document.getElementById('householdType')
+
+            }
         }
     });
 });
