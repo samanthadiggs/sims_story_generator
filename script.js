@@ -182,6 +182,22 @@ document.getElementById('generate').addEventListener('click', function() {
                         }
                         
                         resolve(job); // Resolve the promise with the job
+                    } else if (detail === 'degree'){
+                        const data = results.data;
+                        const degreesFilteredData = data.filter(item => item.Type == 'Degree');
+
+                        let degree = '';
+
+                        // Select a random job if available
+                        if (degreesFilteredData.length > 0) {
+                            degree = occupationsFilteredData[Math.floor(Math.random() * degreesFilteredData.length)].Title;
+                        } else {
+                            degree = 'No matching jobs found.';
+                        }
+
+                        resolve(degree); // resolve promise with the degree
+
+
                     } else {
                         reject('No matching detail'); // Reject the promise if the detail doesn't match
                     }
@@ -292,6 +308,41 @@ document.getElementById('generate').addEventListener('click', function() {
             } else if(genType === 'story'){
 
                 const household = document.getElementById('householdType')
+
+                // step 1: generate names
+                const firstFilteredData = data.filter(item => item.Nationality === nationality && item.Gender === gender && item.Type === 'First');
+                const lastFilteredData = data.filter(item => item.Nationality === nationality && item.Type === 'Last');
+
+                let firstName = '';
+                let lastName = '';
+
+                // Select a random first name if available
+                if (firstFilteredData.length > 0) {
+                    firstName = firstFilteredData[Math.floor(Math.random() * firstFilteredData.length)].Name;
+                } else {
+                    firstName = 'No matching first names found.';
+                }
+
+                // Select a random last name if available
+                if (lastFilteredData.length > 0) {
+                    lastName = lastFilteredData[Math.floor(Math.random() * lastFilteredData.length)].Name;
+                } else {
+                    lastName = 'No matching last names found.';
+                }
+
+                // Combine first and last name for output
+                names = `${firstName} ${lastName}`;
+
+
+                
+
+
+
+                generatedOutput.innerHTML += `
+                            <p class="outputText">Sims 4 Description</p>
+                            <p class="outputText> This sim's name is ${names}. They are of ${nationality} nationality and ${gender} gender. </p>
+
+                    `;
 
             }
         }

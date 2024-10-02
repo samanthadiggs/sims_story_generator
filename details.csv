@@ -1,6 +1,76 @@
 Type,Title
+Job,Actress/Actor
+Job,Astronaut
+Job,Professional Athlete
+Job,Bodybuilder (Athlete)
+Job,Management (Business)
+Job,Investor (Business)
+Job,Green Technician (Civil Designer)
+Job,Civic Planner (Civil Designer)
+Job,Chef (Culinary)
+Job,Mixologist (Culinary)
+Job,Arts Critic (Critic)
+Job,Food Critic (Critic)
+Job,Detective
+Job,Doctor
+Job,Administrator (Education)
+Job,Professor(Education)
+Job,Politician (Politician)
+Job,Charity Organizer (Politician)
+Job,Master of the Arts Painter
+Job,Patron of the Arts Painter
+Job,Scientist
+Job,Internet Personality
+Job,Public Relations
+Job,Secret Agent
+Job,Tech Guru
+Job,Writer
+Job,Gardener
+Job,Botanist
+Job,Stylist
+Job,Trendsetter
+Job,Interpreter
+Job,Help Desk Technician
+Job,Handyperson
+Job,Gym Associate
+Job,Genetic Counselor
+Job,Event Planner
+Job,EMT Technician
+Job,Dietitian
+Job,Dentist
+Job,Database Administrator
+Job,Construction Worker
+Job,Computer Research Scientist
+Job,Private Teacher
+Job,OBGYN
+Job,Nursing Home Attendant
+Job,Neuroscientist
+Job,Medical Field
+Job,Market Research Analyst
+Job,Web Developer
+Job,Software Developer
+Job,Remote Office Assistant
+Job,Publisher
+Job,Public Health
+Job,IT Project Manager
 Job,Banker
 Job,Biochemist
 Job,Business Consultant
 Job,Celebrity Manager
 Job,Computer Information Manager
+Job,Veternarian
+Fame,Famous
+Fame,Not Famous
+Fame,Just Starting to Get Famous
+Degree,Art history
+Degree,Biology
+Degree,Communications
+Degree,Computer science
+Degree,Culinary arts
+Degree,Drama
+Degree,Economics
+Degree,Fine arts
+Degree,History
+Degree,Language and literature
+Degree,Physics
+Degree,Physchology
