@@ -1,0 +1,45 @@
+@font-face {
+    font-family: 'Milku'; /*a name to be used later*/
+    src: url('milku/Milku.otf'); /*URL to font*/
+}
+
+body{
+    font-family: 'Milku';
+    padding-left:10em;
+    padding-right:10em;
+    background-color:#EEFBFF;
+}
+
+
+#pageHeader{
+    text-align: center;
+}
+
+#input{
+    display:flex;
+    padding:8em;
+    flex-direction:column;
+    justify-items: center;
+    row-gap:10px;
+}
+
+#additionalInput{
+    display:flex;
+    flex-direction:column;
+    justify-items: center;
+    row-gap:10px;
+
+}
+.dropdown{
+    padding:15px 32px;
+    text-align: center;
+    border-radius: 0.75rem;
+    border-width: 0.15rem;
+    border-color: #FF7B9C;
+
+}
+
+.outputText{
+    text-align:center;
+    font-size:2em;
+}
