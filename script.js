@@ -218,10 +218,9 @@ document.getElementById('generate').addEventListener('click', function() {
             // let output = '';
 
             if (genType === 'full' || genType === 'partial') {
-                // Generate a full, partial, or story
+                // Generate a full, partial
 
                // Generating the names
-
 
                 const firstFilteredData = data.filter(item => item.Nationality === nationality && item.Gender === gender && item.Type === 'First');
                 const lastFilteredData = data.filter(item => item.Nationality === nationality && item.Type === 'Last');
@@ -247,13 +246,14 @@ document.getElementById('generate').addEventListener('click', function() {
                 names = `${firstName} ${lastName}`;
 
                 if(genType == 'full'){
-                    getDetails('job').then(job => {
+                    Promise.all([getDetails('job'), getDetails('degree')]).then(([job, degree]) => {
                         generatedOutput.innerHTML += `
                             <p class="outputText">Generated Profile:</p>
                             <p class="outputText">Nationality: ${nationality}</p>
                             <p class="outputText">Name: ${names}</p>
                             <p class="outputText">Age: ${randomAge}</p>
                             <p class="outputText">Job: ${job}</p>
+                            <p class="outputText">Job: ${degree}</p>
                         `;
                     }).catch(error => {
                         console.error(error);
