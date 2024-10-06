@@ -17,7 +17,9 @@ document.getElementById('generationType').addEventListener('change', function() 
             <select class="dropdown form-select" id="nationality">
                 <option value="">Select Nationality</option>
                 <option value="Random">Random</option>
+                <option value="African American">African American</option>
                 <option value="American">American</option>
+                <option value="Arabic">Arabic</option>
                 <option value="French">French</option>
                 <option value="Chinese">Chinese</option>
                 <option value="Korean">Korean</option>
@@ -26,13 +28,12 @@ document.getElementById('generationType').addEventListener('change', function() 
                 <option value="Thai">Thai</option>
                 <option value="Italian">Italian</option>
                 <option value="Spanish">Spanish</option>
-                <option value="African American">African American</option>
                 <option value="Indian">Indian</option>
                 <option value="Filipino">Filipino</option>
                 <option value="Greek">Greek</option>
-                <option value="Arabic">Arabic</option>
                 <option value="Nigerian">Nigerian</option>
                 <option value="Hawaiian">Hawaiian</option>
+                <option value="Polynesian">Polynesian</option>
             </select>
         `;
     } else if (type === 'random') {
@@ -55,7 +56,9 @@ document.getElementById('generationType').addEventListener('change', function() 
             <select class="dropdown form-select" id="nationalityRandom">
                 <option value="">Select Nationality</option>
                 <option value="Random">Random</option>
+                <option value="African American">African American</option>
                 <option value="American">American</option>
+                <option value="Arabic">Arabic</option>
                 <option value="French">French</option>
                 <option value="Chinese">Chinese</option>
                 <option value="Korean">Korean</option>
@@ -64,13 +67,12 @@ document.getElementById('generationType').addEventListener('change', function() 
                 <option value="Thai">Thai</option>
                 <option value="Italian">Italian</option>
                 <option value="Spanish">Spanish</option>
-                <option value="African American">African American</option>
                 <option value="Indian">Indian</option>
                 <option value="Filipino">Filipino</option>
                 <option value="Greek">Greek</option>
-                <option value="Arabic">Arabic</option>
                 <option value="Nigerian">Nigerian</option>
                 <option value="Hawaiian">Hawaiian</option>
+                <option value="Polynesian">Polynesian</option>
             </select>
             <input type="range" id="numberOfNames" min="1" max="20" value="10" oninput="this.nextElementSibling.value = this.value">
             <output>10</output>
@@ -115,6 +117,7 @@ document.getElementById('generationType').addEventListener('change', function() 
                 <option value="Arabic">Arabic</option>
                 <option value="Nigerian">Nigerian</option>
                 <option value="Hawaiian">Hawaiian</option>
+                <option value="Polynesian">Polynesian</option>
             </select>
 
             <select class="dropdown form-select" id="nationalityStory2">
@@ -190,7 +193,7 @@ document.getElementById('generate').addEventListener('click', function() {
 
                         // Select a random job if available
                         if (degreesFilteredData.length > 0) {
-                            degree = occupationsFilteredData[Math.floor(Math.random() * degreesFilteredData.length)].Title;
+                            degree = degreesFilteredData[Math.floor(Math.random() * degreesFilteredData.length)].Title;
                         } else {
                             degree = 'No matching jobs found.';
                         }
@@ -253,7 +256,7 @@ document.getElementById('generate').addEventListener('click', function() {
                             <p class="outputText">Name: ${names}</p>
                             <p class="outputText">Age: ${randomAge}</p>
                             <p class="outputText">Job: ${job}</p>
-                            <p class="outputText">Job: ${degree}</p>
+                            <p class="outputText">Degree: ${degree}</p>
                         `;
                     }).catch(error => {
                         console.error(error);
@@ -330,14 +333,9 @@ document.getElementById('generate').addEventListener('click', function() {
                     lastName = 'No matching last names found.';
                 }
 
+
                 // Combine first and last name for output
                 names = `${firstName} ${lastName}`;
-
-
-                
-
-
-
                 generatedOutput.innerHTML += `
                             <p class="outputText">Sims 4 Description</p>
                             <p class="outputText> This sim's name is ${names}. They are of ${nationality} nationality and ${gender} gender. </p>
