@@ -35,4 +35,15 @@ for nationality in names_dict.keys():
 jobs = details_df[details_df["Type"] == "Job"]["Title"].tolist()
 degrees = details_df[details_df["Type"] == "Degree"]["Title"].tolist()
 
-# Combin
+# Combine data
+data_json = {
+    "nationalities": names_dict,
+    "jobs": jobs,
+    "degrees": degrees
+}
+
+# Save to JSON
+with open("data.json", "w") as json_file:
+    json.dump(data_json, json_file, indent=4)
+
+print("✅ JSON file created successfully!")
