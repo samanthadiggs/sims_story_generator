@@ -146,12 +146,19 @@ document.getElementById('generationType').addEventListener('change', function() 
 
 document.getElementById('generate').addEventListener('click', function() {
     const genType = document.getElementById('generationType').value;
-    const nationality = document.getElementById('nationality')?.value || document.getElementById('nationalityRandom')?.value;
+    let nationality = document.getElementById('nationality')?.value || document.getElementById('nationalityRandom')?.value;
     const gender = document.getElementById('gender')?.value || document.getElementById('genderRandom')?.value;
-    
     const generatedOutput = document.getElementById('output');
 
     document.getElementById('output').innerHTML = ''; // Clear previous outputs
+
+    // If "Random" is selected for nationality, choose a random one
+    if (nationality === 'Random') {
+        const nationalityDropdown = document.getElementById('nationality'); // Get the dropdown
+        const options = [...nationalityDropdown.options].map(option => option.value); // Extract values
+        const filteredOptions = options.filter(option => option !== 'Random' && option !== ''); // Remove 'Random' and empty option
+        nationality = filteredOptions[Math.floor(Math.random() * filteredOptions.length)]; // Pick a random nationality
+    }
 
     // functions & their variables
 
