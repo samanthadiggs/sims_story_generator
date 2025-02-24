@@ -152,70 +152,99 @@ document.getElementById('generate').addEventListener('click', function() {
 
     document.getElementById('output').innerHTML = ''; // Clear previous outputs
 
-    // If "Random" is selected for nationality, choose a random one
-    if (nationality === 'Random') {
-        const nationalityDropdown = document.getElementById('nationality'); // Get the dropdown
-        const options = [...nationalityDropdown.options].map(option => option.value); // Extract values
-        const filteredOptions = options.filter(option => option !== 'Random' && option !== ''); // Remove 'Random' and empty option
-        nationality = filteredOptions[Math.floor(Math.random() * filteredOptions.length)]; // Pick a random nationality
-    }
+    fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+            const namesData = data.nationalities;
+            const jobs = data.jobs;
+            const degrees = data.degrees;
 
-    // functions & their variables
+            // If "Random" nationality is selected, choose one at random
+            if (nationality === "Random") {
+                const nationalityKeys = Object.keys(namesData);
+                nationality = nationalityKeys[Math.floor(Math.random() * nationalityKeys.length)];
+            }
 
-    function getRandomAgeCategory(){
-        const ageCategories = ['Young Adult', 'Adult', 'Elder'];
-        const randomIndex = Math.floor(Math.random() * ageCategories.length);
-        return ageCategories[randomIndex];
-    };
+            // Ensure nationality exists in the dataset
+            if (!namesData[nationality]) {
+                generatedOutput.innerHTML = `<p class="outputText">Error: Nationality not found.</p>`;
+                return;
+            }
 
-    const randomAge = getRandomAgeCategory();
+            // Generate first and last names
+            let firstName = "No matching first names found.";
+            let lastName = "No matching last names found.";
 
-    function getDetails(details){
-        return new Promise((resolve, reject) => { // return a promise
-            let file = 'details.csv';
-            const detail = details;
-            Papa.parse(file, {
-                header: true,
-                download: true,
-                complete: function(results) {
-                    if (detail === 'job') { 
-                        const data = results.data;
-                        const occupationsFilteredData = data.filter(item => item.Type === 'Job');
-    
-                        let job = '';
-    
-                        // Select a random job if available
-                        if (occupationsFilteredData.length > 0) {
-                            job = occupationsFilteredData[Math.floor(Math.random() * occupationsFilteredData.length)].Title;
-                        } else {
-                            job = 'No matching jobs found.';
-                        }
-                        
-                        resolve(job); // Resolve the promise with the job
-                    } else if (detail === 'degree'){
-                        const data = results.data;
-                        const degreesFilteredData = data.filter(item => item.Type == 'Degree');
+            if (genType === 'full' || genType === 'partial') {
+                const firstNamesList = namesData[nationality][gender]?.First || [];
+                const lastNamesList = namesData[nationality]["None"]?.Last || [];
 
-                        let degree = '';
-
-                        // Select a random job if available
-                        if (degreesFilteredData.length > 0) {
-                            degree = degreesFilteredData[Math.floor(Math.random() * degreesFilteredData.length)].Title;
-                        } else {
-                            degree = 'No matching jobs found.';
-                        }
-
-                        resolve(degree); // resolve promise with the degree
-
-
-                    } else {
-                        reject('No matching detail'); // Reject the promise if the detail doesn't match
-                    }
+                if (firstNamesList.length > 0) {
+                    firstName = firstNamesList[Math.floor(Math.random() * firstNamesList.length)];
                 }
-            });
-        });
-    }   
+                if (lastNamesList.length > 0) {
+                    lastName = lastNamesList[Math.floor(Math.random() * lastNamesList.length)];
+                }
 
+                // Get random age category
+                const ageCategories = ['Young Adult', 'Adult', 'Elder'];
+                const randomAge = ageCategories[Math.floor(Math.random() * ageCategories.length)];
+
+                if (genType === 'full') {
+                    // Generate job and degree
+                    const job = jobs[Math.floor(Math.random() * jobs.length)];
+                    const degree = degrees[Math.floor(Math.random() * degrees.length)];
+
+                    generatedOutput.innerHTML += `
+                        <p class="outputText">Generated Profile:</p>
+                        <p class="outputText">Nationality: ${nationality}</p>
+                        <p class="outputText">Name: ${firstName} ${lastName}</p>
+                        <p class="outputText">Age: ${randomAge}</p>
+                        <p class="outputText">Job: ${job}</p>
+                        <p class="outputText">Degree: ${degree}</p>
+                    `;
+                } else if (genType === 'partial') {
+                    generatedOutput.innerHTML += `
+                        <p class="outputText">Generated Profile:</p>
+                        <p class="outputText">Nationality: ${nationality}</p>
+                        <p class="outputText">Name: ${firstName} ${lastName}</p>
+                        <p class="outputText">Age: ${randomAge}</p>
+                    `;
+                } else if (genType === 'random'){
+                    const numberOfNames = document.getElementById('numberOfNames').value;
+                    const randomType = document.getElementById('typeRandom').value;
+                    const customName = document.getElementById('customName').value;
+
+                    console.log('random generation')
+                    console.log(`number of names is ${numberOfNames}`)
+                    console.log(`custom name is${customName} `)
+
+                    if(randomType == 'First'){
+                        const firstNamesList = namesData[nationality][gender]?.First || [];
+                        for (let i = 0; i < numberOfNames; i++) {
+                            randomfirstName = firstNamesList[Math.floor(Math.random() * firstNamesList.length)];                            names = `${randomFirst} ${customName}`;
+                            generatedOutput.innerHTML += `
+                                <p class="outputText">Name: ${randomfirstName}</p>
+                        `;
+                        }                             
+                    }else if(randomType == 'Last'){
+                        const lastFilteredData = data.filter(item => item.Nationality === nationality && item.Type === 'Last');
+                        for (let i = 0; i < numberOfNames; i++) {
+                            const randomLast = lastFilteredData[Math.floor(Math.random() * lastFilteredData.length)].Name;
+                            names = `${customName} ${randomLast} `;
+                            generatedOutput.innerHTML += `
+                                <p class="outputText">Name: ${names}</p>
+                        `;
+                        }  
+                    }
+            }
+        }
+    })
+    .catch(error => {
+        console.error("Error loading JSON:", error);
+        generatedOutput.innerHTML = `<p class="outputText">Failed to load data.</p>`;
+    });
+            
 
     // Load the CSV file and generate names based on selections
     
